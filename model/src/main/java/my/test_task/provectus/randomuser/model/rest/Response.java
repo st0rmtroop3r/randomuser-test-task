@@ -15,6 +15,10 @@ public class Response {
     @SerializedName("results")
     private List<RandomUser> randomUsers;
 
+    public List<RandomUser> getRandomUsers() {
+        return randomUsers;
+    }
+
     @Override
     public String toString() {
         return "Response{" +

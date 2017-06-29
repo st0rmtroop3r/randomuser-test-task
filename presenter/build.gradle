@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'me.tatarka.retrolambda'
+
+dependencies {
+    compile project(":model")
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    // Dagger 2
+    compile 'com.google.dagger:dagger:2.9'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
