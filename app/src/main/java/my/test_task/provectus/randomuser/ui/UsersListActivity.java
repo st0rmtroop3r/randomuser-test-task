@@ -2,12 +2,17 @@ package my.test_task.provectus.randomuser.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import my.test_task.provectus.R;
+import my.test_task.provectus.randomuser.adapter.UsersListRecyclerAdapter;
 import my.test_task.provectus.randomuser.dagger.component.NonConfigurationComponent;
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.presenter.UsersListPresenter;
@@ -17,15 +22,23 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
 
     private static final String TAG = UsersListActivity.class.getSimpleName();
 
+    @BindView(R.id.rcv_users_list)
+    RecyclerView rcvUsersList;
+
     @Inject
     UsersListPresenter presenter;
+
+    private UsersListRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        adapter = new UsersListRecyclerAdapter();
+        rcvUsersList.setAdapter(adapter);
+        rcvUsersList.setLayoutManager(new LinearLayoutManager(this));
 
         presenter.attach(this);
-
     }
 
     @Override
@@ -36,6 +49,10 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
     @Override
     public void setRandomUsers(List<RandomUser> randomUsers) {
         Log.i(TAG, "randomUsers = " + randomUsers);
+        for (RandomUser user : randomUsers) {
+            adapter.addUser(user);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override

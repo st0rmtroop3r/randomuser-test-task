@@ -6,6 +6,18 @@ public class UserPicture {
     private String medium;
     private String thumbnail;
 
+    public String getLarge() {
+        return large;
+    }
+
+    public String getMedium() {
+        return medium;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
     @Override
     public String toString() {
         return "UserPicture{" +

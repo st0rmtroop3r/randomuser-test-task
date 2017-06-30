@@ -7,12 +7,14 @@ import my.test_task.provectus.randomuser.App;
 import my.test_task.provectus.randomuser.dagger.module.AppModule;
 import my.test_task.provectus.randomuser.dagger.module.NetworkModule;
 import my.test_task.provectus.randomuser.dagger.module.RestModule;
+import my.test_task.provectus.randomuser.dagger.module.SchedulersModule;
 
 @Singleton
 @Component(modules = {
         AppModule.class,
         NetworkModule.class,
-        RestModule.class
+        RestModule.class,
+        SchedulersModule.class
 })
 /**
  * Application component. Source component for all sub-components.

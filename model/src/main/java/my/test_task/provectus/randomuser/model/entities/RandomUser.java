@@ -40,6 +40,89 @@ public class RandomUser {
     @SerializedName("nat")
     private String nationality;
 
+    public String getGender() {
+        return gender;
+    }
+
+    public String getNameTitle() {
+        if (name != null) {
+            return name.getTitle();
+        }
+        return null;
+    }
+
+    public String getFirstName() {
+        if (name != null) {
+            return name.getFirst();
+        }
+        return null;
+    }
+
+    public String getLastName() {
+        if (name != null) {
+            return name.getLast();
+        }
+        return null;
+    }
+
+    public UserLocation getLocation() {
+        return location;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserLogin getLogin() {
+        return login;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getRegistered() {
+        return registered;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getCell() {
+        return cell;
+    }
+
+    public UserId getUserId() {
+        return userId;
+    }
+
+    public String getUserPicLarge() {
+        if (userPic != null) {
+            return userPic.getLarge();
+        }
+        return null;
+    }
+
+    public String getUserPicMedium() {
+        if (userPic != null) {
+            return userPic.getMedium();
+        }
+        return null;
+    }
+
+    public String getUserPicThumbnail() {
+        if (userPic != null) {
+            System.out.println("userPic.getThumbnail() = " +userPic.getThumbnail());
+            return userPic.getThumbnail();
+        }
+        return null;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
     @Override
     public String toString() {
         return "RandomUser{" +
