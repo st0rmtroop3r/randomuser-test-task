@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import io.reactivex.Scheduler;
-import io.reactivex.schedulers.Schedulers;
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.model.rest.RandomuserApi;
 import my.test_task.provectus.randomuser.view.UsersListView;

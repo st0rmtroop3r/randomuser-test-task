@@ -113,7 +113,7 @@ public class RandomUser {
 
     public String getUserPicThumbnail() {
         if (userPic != null) {
-            System.out.println("userPic.getThumbnail() = " +userPic.getThumbnail());
+//            System.out.println("userPic.getThumbnail() = " +userPic.getThumbnail());
             return userPic.getThumbnail();
         }
         return null;

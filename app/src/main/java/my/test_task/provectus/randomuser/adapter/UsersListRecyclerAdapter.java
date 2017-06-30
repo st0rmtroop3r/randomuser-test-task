@@ -1,7 +1,6 @@
 package my.test_task.provectus.randomuser.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
-import my.test_task.provectus.randomuser.ui.view.UserListItem;
+import my.test_task.provectus.randomuser.ui.view.UserListItemView;
 
 public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
 
@@ -21,19 +20,19 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(new UserListItem(parent.getContext()));
+        return new ViewHolder(new UserListItemView(parent.getContext()));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 //        Log.i(TAG, "onBindViewHolder, position = " + position);
-        UserListItem item = (UserListItem) holder.itemView;
+        UserListItemView item = (UserListItemView) holder.itemView;
         RandomUser user = randomUsers.get(position);
         item.setTitle(user.getNameTitle() + " " + user.getFirstName() + " " + user.getLastName());
+
         Picasso.with(item.getContext())
-                .load(user.getUserPicThumbnail())
-                .fit()
-                .into(item.getImvUserPic());
+                .load(user.getUserPicLarge())
+                .into(item);
     }
 
     @Override
@@ -51,11 +50,11 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
 
     private class ViewHolder extends RecyclerView.ViewHolder {
 
-        UserListItem view;
+        UserListItemView view;
 
         ViewHolder(View view) {
             super(view);
-            this.view = (UserListItem) view;
+            this.view = (UserListItemView) view;
         }
     }
 }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="@dimen/dimen_4dp">
 
     <ImageView
         android:id="@+id/imv_user_pic"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_margin="8dp"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@drawable/round_frame"/>
 
     <TextView
         android:id="@+id/txv_user_title"
