@@ -32,6 +32,10 @@ public class UserListItemView extends RelativeLayout implements Target {
     @BindView(R.id.txv_user_title)
     TextView txvUserTitle;
 
+    @BindView(R.id.txv_user_name)
+    TextView txvUserName;
+
+
     public UserListItemView(Context context) {
         super(context);
         init(context);
@@ -75,6 +79,10 @@ public class UserListItemView extends RelativeLayout implements Target {
 
     public void setTitle(CharSequence title) {
         txvUserTitle.setText(title);
+    }
+
+    public void setName(CharSequence name) {
+        txvUserName.setText(name);
     }
 
     public void setUserPic(Drawable drawable) {

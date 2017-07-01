@@ -51,6 +51,12 @@ public class RandomUser {
         return null;
     }
 
+    public void setNameTitle(String title) {
+        if (name != null) {
+            name.setTitle(title);
+        }
+    }
+
     public String getFirstName() {
         if (name != null) {
             return name.getFirst();
@@ -58,11 +64,23 @@ public class RandomUser {
         return null;
     }
 
+    public void setFirstName(String firstName) {
+        if (name != null) {
+            name.setFirst(firstName);
+        }
+    }
+
     public String getLastName() {
         if (name != null) {
             return name.getLast();
         }
         return null;
+    }
+
+    public void setLastName(String lastName) {
+        if (name != null) {
+            name.setLast(lastName);
+        }
     }
 
     public UserLocation getLocation() {

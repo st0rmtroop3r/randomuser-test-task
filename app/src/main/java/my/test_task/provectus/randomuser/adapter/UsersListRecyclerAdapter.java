@@ -28,7 +28,8 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
 //        Log.i(TAG, "onBindViewHolder, position = " + position);
         UserListItemView item = (UserListItemView) holder.itemView;
         RandomUser user = randomUsers.get(position);
-        item.setTitle(user.getNameTitle() + " " + user.getFirstName() + " " + user.getLastName());
+        item.setTitle(user.getNameTitle() + " ");
+        item.setName(user.getFirstName() + " " + user.getLastName());
 
         Picasso.with(item.getContext())
                 .load(user.getUserPicLarge())

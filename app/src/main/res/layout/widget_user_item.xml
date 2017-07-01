@@ -4,8 +4,8 @@
 
     <ImageView
         android:id="@+id/imv_user_pic"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_margin="8dp"
         android:src="@drawable/round_frame"/>
 
@@ -13,9 +13,21 @@
         android:id="@+id/txv_user_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_toEndOf="@id/imv_user_pic"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_centerVertical="true"
-        android:text="mr obi wan kenobi"/>
+        android:gravity="center"
+        style="@style/AppTheme.Text.Secondary"
+        android:text="mr "/>
+
+    <TextView
+        android:id="@+id/txv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/txv_user_title"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        style="@style/AppTheme.Text"
+        android:text="obi wan kenobi"/>
 
 </merge>

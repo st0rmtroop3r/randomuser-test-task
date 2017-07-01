@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.inject.Inject;
 
@@ -47,8 +47,9 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
     }
 
     @Override
-    public void setRandomUsers(List<RandomUser> randomUsers) {
-        Log.i(TAG, "randomUsers = " + randomUsers);
+    public void setRandomUsers(Collection<RandomUser> randomUsers) {
+//        Log.i(TAG, "randomUsers = " + randomUsers);
+        Log.i(TAG, "randomUsers size " + randomUsers.size());
         for (RandomUser user : randomUsers) {
             adapter.addUser(user);
         }
