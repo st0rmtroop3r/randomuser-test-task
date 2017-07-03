@@ -16,6 +16,7 @@ import my.test_task.provectus.randomuser.adapter.UsersListRecyclerAdapter;
 import my.test_task.provectus.randomuser.dagger.component.NonConfigurationComponent;
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.presenter.UsersListPresenter;
+import my.test_task.provectus.randomuser.ui.listener.OnUserItemClickListener;
 import my.test_task.provectus.randomuser.view.UsersListView;
 
 public class UsersListActivity extends BaseActivity implements UsersListView {
@@ -34,7 +35,8 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        adapter = new UsersListRecyclerAdapter();
+
+        adapter = new UsersListRecyclerAdapter(new OnUserItemClickListener(rcvUsersList));
         rcvUsersList.setAdapter(adapter);
         rcvUsersList.setLayoutManager(new LinearLayoutManager(this));
 

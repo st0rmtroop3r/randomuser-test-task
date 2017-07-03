@@ -1,14 +1,10 @@
 package my.test_task.provectus.randomuser.ui.view;
 
-import android.animation.AnimatorInflater;
-import android.animation.StateListAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -35,6 +31,7 @@ public class UserListItemView extends RelativeLayout implements Target {
     @BindView(R.id.txv_user_name)
     TextView txvUserName;
 
+    private boolean isExpanded = false;
 
     public UserListItemView(Context context) {
         super(context);
@@ -59,22 +56,18 @@ public class UserListItemView extends RelativeLayout implements Target {
                 getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin),
                 getResources().getDimensionPixelSize(R.dimen.dimen_4dp),
                 getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin),
-                getResources().getDimensionPixelSize(R.dimen.dimen_4dp));
+                getResources().getDimensionPixelSize(R.dimen.dimen_4dp)
+        );
         setLayoutParams(layoutParams);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            StateListAnimator animator = AnimatorInflater
-                    .loadStateListAnimator(context, R.animator.user_item_elevation);
-            setStateListAnimator(animator);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            StateListAnimator animator = AnimatorInflater
+//                    .loadStateListAnimator(context, R.animator.user_item_elevation);
+//            setStateListAnimator(animator);
+//        }
 
         setBackground(getResources().getDrawable(R.drawable.rounded_corners_solid));
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Log.d(TAG, "onClick, view =" + view);
-            }
-        });
+
     }
 
     public void setTitle(CharSequence title) {
@@ -106,5 +99,13 @@ public class UserListItemView extends RelativeLayout implements Target {
     @Override
     public void onPrepareLoad(Drawable placeHolderDrawable) {
         imvUserPic.setBackground(placeHolderDrawable);
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 }

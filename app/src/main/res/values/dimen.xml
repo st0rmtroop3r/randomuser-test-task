@@ -7,4 +7,7 @@
     <dimen name="dimen_2dp">2dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
 
+    <dimen name="item_elevation">16dp</dimen>
+    <integer name="item_elevation_duration">300</integer>
+
 </resources>

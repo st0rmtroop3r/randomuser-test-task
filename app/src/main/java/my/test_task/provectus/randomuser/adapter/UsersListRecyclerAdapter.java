@@ -16,7 +16,12 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
 
     private static final String TAG = UsersListRecyclerAdapter.class.getSimpleName();
 
-    private final List<RandomUser> randomUsers = new ArrayList<>();
+    private final List<RandomUser> mRandomUsers = new ArrayList<>();
+    private final View.OnClickListener mListener;
+
+    public UsersListRecyclerAdapter(View.OnClickListener listener) {
+        mListener = listener;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,26 +32,28 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 //        Log.i(TAG, "onBindViewHolder, position = " + position);
         UserListItemView item = (UserListItemView) holder.itemView;
-        RandomUser user = randomUsers.get(position);
+        RandomUser user = mRandomUsers.get(position);
         item.setTitle(user.getNameTitle() + " ");
         item.setName(user.getFirstName() + " " + user.getLastName());
 
         Picasso.with(item.getContext())
                 .load(user.getUserPicLarge())
                 .into(item);
+        item.setTag(holder);
+        item.setOnClickListener(mListener);
     }
 
     @Override
     public int getItemCount() {
-        return randomUsers.size();
+        return mRandomUsers.size();
     }
 
     public void addUser(RandomUser user) {
-        randomUsers.add(user);
+        mRandomUsers.add(user);
     }
 
     public void clearAll() {
-        randomUsers.clear();
+        mRandomUsers.clear();
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
