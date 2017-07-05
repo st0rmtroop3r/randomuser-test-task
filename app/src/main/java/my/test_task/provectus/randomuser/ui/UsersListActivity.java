@@ -39,10 +39,27 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
         rcvUsersList.setLayoutManager(new CustomLayoutManager(this));
         adapter = new UsersListRecyclerAdapter(new OnUserItemClickListener(rcvUsersList));
         rcvUsersList.setAdapter(adapter);
+        presenter.attach(this);
+
+        Log.d(TAG, "savedInstanceState == " + savedInstanceState);
+        if (savedInstanceState == null) {
+        } else {
+
+            Log.d(TAG, "savedInstanceState.size = " + savedInstanceState.size());
+            for (String s : savedInstanceState.keySet()) {
+                Log.d(TAG, "s = " + s);
+            }
+
+            Bundle bundle = savedInstanceState.getBundle("android:viewHierarchyState");
+            Log.d(TAG, "bundle.size = " + bundle.size());
+            for (String s : bundle.keySet()) {
+                Log.d(TAG, "bundle s = " + s + ", " + bundle.getSparseParcelableArray(s));
+            }
+        }
+
 
         // TODO add tablet and landscape mode
 
-        presenter.attach(this);
     }
 
     @Override

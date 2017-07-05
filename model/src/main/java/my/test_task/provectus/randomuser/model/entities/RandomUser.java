@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class RandomUser {
 
+    private boolean mIsSelected;
+
     @SerializedName("gender")
     private String gender;
 
@@ -39,6 +41,14 @@ public class RandomUser {
 
     @SerializedName("nat")
     private String nationality;
+
+    public void setSelected(boolean mIsSelected) {
+        this.mIsSelected = mIsSelected;
+    }
+
+    public boolean isSelected() {
+        return mIsSelected;
+    }
 
     public String getGender() {
         return gender;

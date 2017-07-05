@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import my.test_task.provectus.R;
+import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.ui.utils.CustomLayoutManager;
 import my.test_task.provectus.randomuser.ui.view.UserListItemView;
 
@@ -44,10 +45,12 @@ public class OnUserItemClickListener implements View.OnClickListener {
     }
 
     private void expandView(final UserListItemView view) {
-
+//        Log.i(TAG, "expandView, first name = " + ((RandomUser)view.getTag()).getFirstName());
         firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
         view.setSelected(true);
+        ((RandomUser)view.getTag()).setSelected(true);
 
+        // set delay to animate expanding after elevation finished
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -76,6 +79,7 @@ public class OnUserItemClickListener implements View.OnClickListener {
     }
 
     private void collapseView(final UserListItemView view) {
+//        Log.i(TAG, "collapseView, first name = " + ((RandomUser)view.getTag()).getFirstName());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             TransitionManager.beginDelayedTransition(mRecyclerView,
@@ -90,11 +94,13 @@ public class OnUserItemClickListener implements View.OnClickListener {
         layoutManager.setScrollEnabled(true);
         layoutManager.scrollToPositionWithOffset(firstVisibleItemPosition, 0);
 
+        // set delay to animate elevation after expanding finished
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
                         view.setSelected(false);
+                        ((RandomUser)view.getTag()).setSelected(false);
                     }
                 }, duration);
     }

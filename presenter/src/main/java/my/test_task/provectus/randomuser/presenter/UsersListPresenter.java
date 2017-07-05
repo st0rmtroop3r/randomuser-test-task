@@ -6,6 +6,7 @@ import java.util.TreeSet;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import io.reactivex.Scheduler;
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
@@ -16,6 +17,7 @@ import my.test_task.provectus.randomuser.view.UsersListView;
 import static my.test_task.provectus.randomuser.presenter.PresenterConfig.SCHEDULER_IO;
 import static my.test_task.provectus.randomuser.presenter.PresenterConfig.SCHEDULER_MAIN;
 
+@Singleton
 public class UsersListPresenter {
 
     private static final String TAG = UsersListPresenter.class.getSimpleName() + ": ";
@@ -72,7 +74,7 @@ public class UsersListPresenter {
     }
 
     private void onHttpRequestError(Throwable throwable) {
-        System.out.println(TAG + "throwable = " + throwable);
+        System.err.println(TAG + "throwable = " + throwable);
         if (throwable != null) {
             throwable.printStackTrace();
         }
