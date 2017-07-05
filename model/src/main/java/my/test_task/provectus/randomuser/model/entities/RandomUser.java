@@ -87,12 +87,47 @@ public class RandomUser {
         return location;
     }
 
+    public String getLocationStreet() {
+        if (location != null) {
+            return location.getStreet();
+        }
+        return null;
+    }
+
+    public String getLocationCity() {
+        if (location != null) {
+            return location.getCity();
+        }
+        return null;
+    }
+
+    public String getLocationState() {
+        if (location != null) {
+            return location.getState();
+        }
+        return null;
+    }
+
+    public String getLocationPostCode() {
+        if (location != null) {
+            return location.getPostcode();
+        }
+        return null;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public UserLogin getLogin() {
         return login;
+    }
+
+    public String getLoginUsername() {
+        if (login != null) {
+            return login.getUsername();
+        }
+        return null;
     }
 
     public String getDateOfBirth() {

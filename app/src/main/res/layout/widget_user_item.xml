@@ -1,32 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imv_user_pic"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
-        android:src="@drawable/round_frame"/>
+        android:src="@drawable/round_frame" />
 
     <TextView
         android:id="@+id/txv_user_title"
+        style="@style/AppTheme.Text.Thin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imv_user_pic"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        style="@style/AppTheme.Text.Secondary"
-        android:text="mr "/>
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/imv_user_pic"
+        android:text="mr " />
 
     <TextView
         android:id="@+id/txv_user_name"
+        style="@style/AppTheme.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_toEndOf="@id/txv_user_title"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        style="@style/AppTheme.Text"
-        android:text="obi wan kenobi"/>
+        android:text="obi wan kenobi" />
+
+    <ImageView
+        android:id="@+id/imv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_close_gray_24dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/imv_user_pic">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txv_user_login"
+                style="@style/AppTheme.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_selector"
+                android:clickable="true"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:paddingTop="@dimen/text_padding_vertical"
+                android:text="obi.wan.kenobi" />
+
+            <TextView
+                android:id="@+id/txv_user_login_label"
+                style="@style/AppTheme.Text.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_user_login"
+                android:layout_marginTop="@dimen/text_padding_vertical_negative"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:text="@string/lbl_username" />
+
+
+            <TextView
+                android:id="@+id/txv_email"
+                style="@style/AppTheme.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_user_login_label"
+                android:background="@drawable/ripple_selector"
+                android:clickable="true"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:paddingTop="@dimen/text_padding_vertical"
+                android:text="obi.wan.kenobi@jedi.force" />
+
+            <TextView
+                android:id="@+id/txv_email_label"
+                style="@style/AppTheme.Text.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_email"
+                android:layout_marginTop="@dimen/text_padding_vertical_negative"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:text="@string/lbl_e_mail" />
+
+
+            <TextView
+                android:id="@+id/txv_phone"
+                style="@style/AppTheme.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_email_label"
+                android:background="@drawable/ripple_selector"
+                android:clickable="true"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:paddingTop="@dimen/text_padding_vertical"
+                android:text="(473)-610-9954" />
+
+            <TextView
+                android:id="@+id/txv_phone_label"
+                style="@style/AppTheme.Text.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_phone"
+                android:layout_marginTop="@dimen/text_padding_vertical_negative"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:text="@string/lbl_phone" />
+
+            <TextView
+                android:id="@+id/txv_cell"
+                style="@style/AppTheme.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_phone_label"
+                android:background="@drawable/ripple_selector"
+                android:clickable="true"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:paddingTop="@dimen/text_padding_vertical"
+                android:text="0432-995-269" />
+
+            <TextView
+                android:id="@+id/txv_cell_label"
+                style="@style/AppTheme.Text.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_cell"
+                android:layout_marginTop="@dimen/text_padding_vertical_negative"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:text="@string/lbl_cell" />
+
+            <TextView
+                android:id="@+id/txv_dob"
+                style="@style/AppTheme.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_cell_label"
+                android:background="@drawable/ripple_selector"
+                android:clickable="true"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:paddingTop="@dimen/text_padding_vertical"
+                android:text="1949-07-10 07:31:10" />
+
+            <TextView
+                android:id="@+id/txv_dob_label"
+                style="@style/AppTheme.Text.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_dob"
+                android:layout_marginTop="@dimen/text_padding_vertical_negative"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:text="@string/lbl_date_of_birth" />
+
+            <TextView
+                android:id="@+id/txv_registered"
+                style="@style/AppTheme.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_dob_label"
+                android:background="@drawable/ripple_selector"
+                android:clickable="true"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:paddingTop="@dimen/text_padding_vertical"
+                android:text="1949-07-10 07:31:10" />
+
+            <TextView
+                android:id="@+id/txv_registered_label"
+                style="@style/AppTheme.Text.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_registered"
+                android:layout_marginTop="@dimen/text_padding_vertical_negative"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:text="@string/lbl_registration_date" />
+
+            <TextView
+                android:id="@+id/txv_location"
+                style="@style/AppTheme.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_registered_label"
+                android:background="@drawable/ripple_selector"
+                android:clickable="true"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:paddingTop="@dimen/text_padding_vertical"
+                android:text="
+6403 cherry st
+toowoomba
+western australia
+7777" />
+
+            <TextView
+                android:id="@+id/txv_location_label"
+                style="@style/AppTheme.Text.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_location"
+                android:layout_marginTop="@dimen/text_padding_vertical_negative"
+                android:paddingBottom="@dimen/text_padding_vertical"
+                android:paddingEnd="@dimen/text_padding_horizontal"
+                android:paddingStart="@dimen/text_padding_horizontal"
+                android:text="@string/lbl_location" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </merge>

@@ -3,6 +3,10 @@
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_padding_vertical">20dp</dimen>
+    <dimen name="text_padding_vertical_negative">-20dp</dimen>
+    <dimen name="text_padding_horizontal">16dp</dimen>
+    <dimen name="text_padding_horizontal_negative">-16dp</dimen>
 
     <dimen name="dimen_2dp">2dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>

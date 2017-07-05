@@ -9,6 +9,30 @@ public class UserLogin {
     private String sha1;
     private String sha256;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public String getSha1() {
+        return sha1;
+    }
+
+    public String getSha256() {
+        return sha256;
+    }
+
     @Override
     public String toString() {
         return "UserLogin{" +

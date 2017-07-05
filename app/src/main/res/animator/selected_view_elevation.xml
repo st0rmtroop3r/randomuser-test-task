@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:state_selected="true">
+
+        <objectAnimator
+            android:interpolator="@android:interpolator/accelerate_cubic"
+            android:duration="@integer/item_elevation_duration"
+            android:propertyName="translationZ"
+            android:valueFrom="0dp"
+            android:valueTo="@dimen/item_elevation"
+            android:valueType="floatType" />
+
+    </item>
+
     <item android:state_selected="false">
 
         <objectAnimator

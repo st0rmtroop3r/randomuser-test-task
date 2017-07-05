@@ -2,7 +2,6 @@ package my.test_task.provectus.randomuser.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -17,6 +16,7 @@ import my.test_task.provectus.randomuser.dagger.component.NonConfigurationCompon
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.presenter.UsersListPresenter;
 import my.test_task.provectus.randomuser.ui.listener.OnUserItemClickListener;
+import my.test_task.provectus.randomuser.ui.utils.CustomLayoutManager;
 import my.test_task.provectus.randomuser.view.UsersListView;
 
 public class UsersListActivity extends BaseActivity implements UsersListView {
@@ -36,9 +36,11 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        rcvUsersList.setLayoutManager(new CustomLayoutManager(this));
         adapter = new UsersListRecyclerAdapter(new OnUserItemClickListener(rcvUsersList));
         rcvUsersList.setAdapter(adapter);
-        rcvUsersList.setLayoutManager(new LinearLayoutManager(this));
+
+        // TODO add tablet and landscape mode
 
         presenter.attach(this);
     }

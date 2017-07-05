@@ -35,6 +35,16 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
         RandomUser user = mRandomUsers.get(position);
         item.setTitle(user.getNameTitle() + " ");
         item.setName(user.getFirstName() + " " + user.getLastName());
+        item.setLogin(user.getLoginUsername());
+        item.setEmail(user.getEmail());
+        item.setPhone(user.getPhone());
+        item.setCell(user.getCell());
+        item.setDob(user.getDateOfBirth());
+        item.setRegistered(user.getRegistered());
+        item.setLocation(user.getLocationStreet() + "\n" +
+                user.getLocationCity() + "\n" +
+                user.getLocationState() + "\n" +
+                user.getLocationPostCode());
 
         Picasso.with(item.getContext())
                 .load(user.getUserPicLarge())

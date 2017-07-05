@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Provectus</string>
-
+    <string name="app_name">Provectus Randomuser</string>
 
     <string name="roboto_regular">sans-serif</string>
     <string name="roboto_light">sans-serif-light</string>
@@ -8,4 +7,13 @@
     <string name="roboto_black">sans-serif-black</string>
     <string name="roboto_thin">sans-serif-thin</string>
     <string name="roboto_medium">sans-serif-medium</string>
+
+    <string name="lbl_username">Username</string>
+    <string name="lbl_e_mail">E-mail</string>
+    <string name="lbl_phone">Phone</string>
+    <string name="lbl_cell">Cell</string>
+    <string name="lbl_date_of_birth">Date of birth</string>
+    <string name="lbl_registration_date">Registration date</string>
+    <string name="lbl_location">Location</string>
+
 </resources>

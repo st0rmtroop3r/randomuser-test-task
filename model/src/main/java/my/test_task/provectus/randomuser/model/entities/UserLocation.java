@@ -7,6 +7,21 @@ public class UserLocation {
     private String state;
     private String postcode;
 
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
 
     @Override
     public String toString() {

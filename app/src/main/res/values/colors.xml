@@ -10,5 +10,6 @@
     <color name="black">#000</color>
     <color name="app_material_grey_900">#212121</color>
     <color name="app_material_grey_600">#757575</color>
+    <color name="app_material_grey_500">#9e9e9e</color>
 
 </resources>

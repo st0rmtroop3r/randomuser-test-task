@@ -1,21 +1,17 @@
 package my.test_task.provectus.randomuser.ui.listener;
 
-import android.animation.AnimatorInflater;
-import android.animation.StateListAnimator;
 import android.os.Build;
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.ChangeBounds;
-import android.transition.ChangeScroll;
+import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
 import my.test_task.provectus.R;
+import my.test_task.provectus.randomuser.ui.utils.CustomLayoutManager;
 import my.test_task.provectus.randomuser.ui.view.UserListItemView;
 
 public class OnUserItemClickListener implements View.OnClickListener {
@@ -24,16 +20,17 @@ public class OnUserItemClickListener implements View.OnClickListener {
 
     private final RecyclerView mRecyclerView;
     private final int duration;
-    private float y;
+    private int firstVisibleItemPosition;
+    private final CustomLayoutManager layoutManager;
 
     public OnUserItemClickListener(RecyclerView recyclerView) {
         mRecyclerView = recyclerView;
         duration = mRecyclerView.getResources().getInteger(R.integer.item_elevation_duration);
+        layoutManager = (CustomLayoutManager) mRecyclerView.getLayoutManager();
     }
 
     @Override
     public void onClick(View view) {
-        Log.d(TAG, "onClick");
 
         if (!(view instanceof UserListItemView)) return;
 
@@ -44,73 +41,62 @@ public class OnUserItemClickListener implements View.OnClickListener {
         } else {
             expandView(itemView);
         }
-
-        itemView.setExpanded(!itemView.isExpanded());
     }
 
-    private void expandView(final View view) {
+    private void expandView(final UserListItemView view) {
 
-        StateListAnimator animator = AnimatorInflater
-                .loadStateListAnimator(view.getContext(), R.animator.elevation_increase);
-        view.setStateListAnimator(animator);
+        firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+        view.setSelected(true);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) view,
+                    TransitionManager.beginDelayedTransition(view,
                             new TransitionSet()
-                                    .addTransition(new ChangeBounds().setDuration(duration).setInterpolator(new DecelerateInterpolator()))
-                                    .addTransition(new ChangeScroll().setDuration(duration))
+                                    .addTransition(new Fade().setDuration(duration))
+                                    .setStartDelay(duration / 2)
+                            );
+                    TransitionManager.beginDelayedTransition(mRecyclerView,
+                            new TransitionSet()
+                                    .addTransition(new ChangeBounds()
+                                            .setDuration(duration)
+                                            .setInterpolator(new DecelerateInterpolator()))
                     );
                 }
 
-                RecyclerView.MarginLayoutParams marginParams = (RecyclerView.MarginLayoutParams) view.getLayoutParams();
-                marginParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                int margin = view.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-                marginParams.setMargins(margin, margin, margin, margin);
-                view.setLayoutParams(marginParams);
+                view.setExpanded(true);
 
-                LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                 int position = layoutManager.getPosition(view);
                 layoutManager.scrollToPositionWithOffset(position, 0);
+                layoutManager.setScrollEnabled(false);
             }
         }, duration);
     }
 
-    private void collapseView(final View view) {
+    private void collapseView(final UserListItemView view) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             TransitionManager.beginDelayedTransition(mRecyclerView,
                     new TransitionSet()
-                            .addTransition(new ChangeBounds().setDuration(duration).setInterpolator(new DecelerateInterpolator()))
-                            .addTransition(new ChangeScroll().setDuration(duration))
-//                            .addTransition(new ChangeClipBounds().setDuration(duration))
+                            .addTransition(new ChangeBounds()
+                                    .setDuration(duration)
+                                    .setInterpolator(new DecelerateInterpolator()))
             );
         }
 
-        RecyclerView.MarginLayoutParams marginParams = (RecyclerView.MarginLayoutParams) view.getLayoutParams();
-        marginParams.setMargins(
-                view.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin),
-                view.getResources().getDimensionPixelSize(R.dimen.dimen_4dp),
-                view.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin),
-                view.getResources().getDimensionPixelSize(R.dimen.dimen_4dp)
-        );
-        marginParams.height = RecyclerView.LayoutParams.WRAP_CONTENT;
-        view.setLayoutParams(marginParams);
+        view.setExpanded(false);
+        layoutManager.setScrollEnabled(true);
+        layoutManager.scrollToPositionWithOffset(firstVisibleItemPosition, 0);
 
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
-                        view.setStateListAnimator(
-                                AnimatorInflater.loadStateListAnimator(view.getContext(),
-                                        R.animator.elevation_decrease));
+                        view.setSelected(false);
                     }
-                },
-                duration
-        );
-
+                }, duration);
     }
 
 }
