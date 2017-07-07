@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 
 public class CustomLayoutManager extends LinearLayoutManager {
 
+    private boolean mIsScrollEnabled = true;
+
     public CustomLayoutManager(Context context) {
         super(context);
     }
@@ -17,8 +19,6 @@ public class CustomLayoutManager extends LinearLayoutManager {
     public CustomLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
-    private boolean mIsScrollEnabled = true;
 
     public void setScrollEnabled(boolean enabled) {
         this.mIsScrollEnabled = enabled;

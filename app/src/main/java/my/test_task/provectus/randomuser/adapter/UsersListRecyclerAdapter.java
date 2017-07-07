@@ -1,7 +1,6 @@
 package my.test_task.provectus.randomuser.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,7 +39,7 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.i(TAG, "onBindViewHolder, position = " + position + ", first name = " + mRandomUsers.get(position).getFirstName());
+//        Log.i(TAG, "onBindViewHolder, position = " + position + ", first name = " + mRandomUsers.get(position).getFirstName());
         UserListItemView item = (UserListItemView) holder.itemView;
         RandomUser user = mRandomUsers.get(position);
         item.setTitle(user.getNameTitle() + " ");

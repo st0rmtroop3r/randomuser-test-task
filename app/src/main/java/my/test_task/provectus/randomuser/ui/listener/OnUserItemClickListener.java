@@ -46,7 +46,7 @@ public class OnUserItemClickListener implements View.OnClickListener {
 
     private void expandView(final UserListItemView view) {
 //        Log.i(TAG, "expandView, first name = " + ((RandomUser)view.getTag()).getFirstName());
-        firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+        firstVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
         view.setSelected(true);
         ((RandomUser)view.getTag()).setSelected(true);
 

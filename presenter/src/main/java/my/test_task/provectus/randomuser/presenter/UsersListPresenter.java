@@ -94,7 +94,7 @@ public class UsersListPresenter {
     }
 
     private String capitalizeFirstLetter(String text) {
-        if (text == null) return null;
+        if (text == null || text.isEmpty()) return text;
         if (text.length() > 1) {
             return String.valueOf(text.charAt(0)).toUpperCase() + text.subSequence(1, text.length());
         } else {

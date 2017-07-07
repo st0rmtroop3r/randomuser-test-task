@@ -14,4 +14,7 @@
     <dimen name="item_elevation">16dp</dimen>
     <integer name="item_elevation_duration">300</integer>
 
+    <dimen name="userpic_size_collapsed">48dp</dimen>
+    <dimen name="userpic_size_expanded">128dp</dimen>
+
 </resources>

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imv_user_pic"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
         android:layout_margin="8dp"
-        android:src="@drawable/round_frame" />
+        android:src="@drawable/round_frame"
+        android:background="@color/app_material_grey_900"
+        />
 
     <TextView
         android:id="@+id/txv_user_title"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_toEndOf="@id/txv_user_title"
+        android:layout_toStartOf="@+id/imv_close"
         android:text="obi wan kenobi" />
 
     <ImageView
@@ -38,6 +41,7 @@
         android:src="@drawable/ic_close_gray_24dp" />
 
     <ScrollView
+        android:id="@+id/scv_user_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/imv_user_pic">
@@ -237,4 +241,4 @@ western australia
 
     </ScrollView>
 
-</merge>
+</RelativeLayout>

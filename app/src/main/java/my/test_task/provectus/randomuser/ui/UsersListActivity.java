@@ -58,7 +58,7 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
         }
 
 
-        // TODO add tablet and landscape mode
+        // TODO add tablet mode
 
     }
 
