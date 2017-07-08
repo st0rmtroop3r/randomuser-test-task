@@ -25,7 +25,7 @@ public class RandomUser {
     private String dateOfBirth;
 
     @SerializedName("registered")
-    private String registered;
+    private String dateRegistered;
 
     @SerializedName("phone")
     private String phone;
@@ -104,6 +104,12 @@ public class RandomUser {
         return null;
     }
 
+    public void setLocationStreet(String street) {
+        if (location != null) {
+            location.setStreet(street);
+        }
+    }
+
     public String getLocationCity() {
         if (location != null) {
             return location.getCity();
@@ -111,11 +117,23 @@ public class RandomUser {
         return null;
     }
 
+    public void setLocationCity(String city) {
+        if (location != null) {
+            location.setCity(city);
+        }
+    }
+
     public String getLocationState() {
         if (location != null) {
             return location.getState();
         }
         return null;
+    }
+
+    public void setLocationState(String state) {
+        if (location != null) {
+            location.setState(state);
+        }
     }
 
     public String getLocationPostCode() {
@@ -144,8 +162,16 @@ public class RandomUser {
         return dateOfBirth;
     }
 
-    public String getRegistered() {
-        return registered;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getDateRegistered() {
+        return dateRegistered;
+    }
+
+    public void setDateRegistered(String date) {
+        dateRegistered = date;
     }
 
     public String getPhone() {
@@ -195,7 +221,7 @@ public class RandomUser {
                 ", email='" + email + '\'' +
                 ", login=" + login +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", registered='" + registered + '\'' +
+                ", registered='" + dateRegistered + '\'' +
                 ", phone='" + phone + '\'' +
                 ", cell='" + cell + '\'' +
                 ", userId=" + userId +

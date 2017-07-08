@@ -8,6 +8,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.ui.utils.CustomLayoutManager;
@@ -20,6 +21,7 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
     private final List<RandomUser> mRandomUsers = new ArrayList<>();
     private final View.OnClickListener mListener;
     private CustomLayoutManager mLayoutManager;
+    Random random = new Random();
 
     public UsersListRecyclerAdapter(View.OnClickListener listener) {
         mListener = listener;
@@ -49,16 +51,19 @@ public class UsersListRecyclerAdapter extends RecyclerView.Adapter {
         item.setPhone(user.getPhone());
         item.setCell(user.getCell());
         item.setDob(user.getDateOfBirth());
-        item.setRegistered(user.getRegistered());
+        item.setRegistered(user.getDateRegistered());
         item.setLocation(user.getLocationStreet() + "\n" +
                 user.getLocationCity() + "\n" +
                 user.getLocationState() + "\n" +
                 user.getLocationPostCode());
 
-        Picasso.with(item.getContext())
-                .load(user.getUserPicLarge())
-                .into(item);
+        if (random.nextBoolean()) {
+            Picasso.with(item.getContext())
+                    .load(user.getUserPicLarge())
+                    .into(item);
+        }
         item.setTag(user);
+
         item.setOnClickListener(mListener);
 
         // on restore: check if user was selected

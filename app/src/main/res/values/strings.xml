@@ -13,7 +13,7 @@
     <string name="lbl_phone">Phone</string>
     <string name="lbl_cell">Cell</string>
     <string name="lbl_date_of_birth">Date of birth</string>
-    <string name="lbl_registration_date">Registration date</string>
+    <string name="lbl_registration_date">Registered</string>
     <string name="lbl_location">Location</string>
 
 </resources>

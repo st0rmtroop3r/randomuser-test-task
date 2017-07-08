@@ -30,6 +30,7 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
     UsersListPresenter presenter;
 
     private UsersListRecyclerAdapter adapter;
+    private OnUserItemClickListener userItemClickListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,29 +38,22 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
         setContentView(R.layout.activity_main);
 
         rcvUsersList.setLayoutManager(new CustomLayoutManager(this));
-        adapter = new UsersListRecyclerAdapter(new OnUserItemClickListener(rcvUsersList));
+        userItemClickListener = new OnUserItemClickListener(rcvUsersList);
+        adapter = new UsersListRecyclerAdapter(userItemClickListener);
         rcvUsersList.setAdapter(adapter);
         presenter.attach(this);
 
-        Log.d(TAG, "savedInstanceState == " + savedInstanceState);
-        if (savedInstanceState == null) {
-        } else {
-
-            Log.d(TAG, "savedInstanceState.size = " + savedInstanceState.size());
-            for (String s : savedInstanceState.keySet()) {
-                Log.d(TAG, "s = " + s);
-            }
-
-            Bundle bundle = savedInstanceState.getBundle("android:viewHierarchyState");
-            Log.d(TAG, "bundle.size = " + bundle.size());
-            for (String s : bundle.keySet()) {
-                Log.d(TAG, "bundle s = " + s + ", " + bundle.getSparseParcelableArray(s));
-            }
-        }
-
-
         // TODO add tablet mode
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (userItemClickListener.isItemExpanded()) {
+            userItemClickListener.collapseItem();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

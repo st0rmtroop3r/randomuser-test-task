@@ -85,14 +85,22 @@ public class UserListItemView extends RelativeLayout implements Target {
     @BindView(R.id.txv_location_label)
     TextView txvLocationLabel;
 
-    private boolean mIsExpanded = false;
     private MarginLayoutParams mThisMarginParams;
-    private LayoutParams collapsedImvCloseLayoutParams;
-    private LayoutParams collapsedTxvUserNameLayoutParams;
-    private LayoutParams collapsedTxvUserTitleLayoutParams;
-    private LayoutParams collapsedScrollViewLayoutParams;
-    private boolean isLandscape;
+    private static LayoutParams scrollViewLayoutParamsCollapsed;
+    private static LayoutParams scrollViewLayoutParamsExpanded;
+    private static LayoutParams txvUserNameLayoutParamsCollapsed;
+    private static LayoutParams txvUserNameLayoutParamsExpanded;
+    private static LayoutParams txvUserNameLayoutParamsExpandedLandscape;
+    private static LayoutParams txvUserTitleLayoutParamsCollapsed;
+    private static LayoutParams txvUserTitleLayoutParamsExpanded;
+    private Drawable mUserPicFrameCollapsed;
+    private Drawable mUserPicFrameExpanded;
+    private boolean mIsExpanded = false;
+    private boolean mIsLandscape;
     private int mCommonMargin;
+    private int mUserPicExpandedPadding;
+    private int mUserPicSizeExpanded;
+    private int mUserPicSizeCollapsed;
 
     public UserListItemView(Context context) {
         super(context);
@@ -117,9 +125,20 @@ public class UserListItemView extends RelativeLayout implements Target {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setLayoutParams(mThisMarginParams);
         mCommonMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+        mUserPicExpandedPadding = getResources().getDimensionPixelSize(R.dimen.dimen_minus_1dp);
+        mUserPicSizeExpanded = getResources().getDimensionPixelSize(R.dimen.userpic_size_expanded);
+        mUserPicSizeCollapsed = getResources().getDimensionPixelSize(R.dimen.userpic_size_collapsed);
+        mUserPicFrameExpanded = getResources().getDrawable(R.drawable.rounded_corners_stroke_whie_2dp);
+        mUserPicFrameCollapsed = getResources().getDrawable(R.drawable.round_frame);
         int screenWidth = getResources().getDisplayMetrics().widthPixels;
         int screenHeight = getResources().getDisplayMetrics().heightPixels;
-        isLandscape = screenHeight - screenWidth < 0;
+        mIsLandscape = screenHeight - screenWidth < 0;
+
+        if (mIsLandscape) {
+            imvClose.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_grey_24dp));
+            ((LayoutParams)imvClose.getLayoutParams()).removeRule(ALIGN_PARENT_END);
+            ((LayoutParams)imvClose.getLayoutParams()).addRule(ALIGN_PARENT_START);
+        }
 
         setExpanded(false);
         setBackground(getResources().getDrawable(R.drawable.rounded_corners_solid));
@@ -130,6 +149,161 @@ public class UserListItemView extends RelativeLayout implements Target {
             setStateListAnimator(animator);
         }
 
+    }
+
+    public boolean isExpanded() {
+        return mIsExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        mIsExpanded = expanded;
+        if (mIsExpanded) {
+            expandView();
+        } else {
+            collapseView();
+        }
+    }
+
+    private void expandView() {
+
+        mThisMarginParams = (MarginLayoutParams) getLayoutParams();
+        mThisMarginParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        mThisMarginParams.setMargins(mCommonMargin, mCommonMargin, mCommonMargin, mCommonMargin);
+
+        imvUserPic.getLayoutParams().height = mUserPicSizeExpanded;
+        imvUserPic.getLayoutParams().width = mUserPicSizeExpanded;
+        imvUserPic.setPadding(mUserPicExpandedPadding, mUserPicExpandedPadding,
+                mUserPicExpandedPadding, mUserPicExpandedPadding);
+        imvUserPic.setImageDrawable(mUserPicFrameExpanded);
+
+        txvUserNameLayoutParamsCollapsed = (LayoutParams) txvUserName.getLayoutParams();
+
+
+
+        setDetailsVisibility(View.VISIBLE);
+
+        if (mIsLandscape) {
+            expandViewInLandscape();
+        } else {
+            if (txvUserNameLayoutParamsExpanded == null) {
+                txvUserNameLayoutParamsExpanded = new LayoutParams(txvUserName.getLayoutParams());
+                txvUserNameLayoutParamsExpanded.addRule(BELOW, txvUserTitle.getId());
+                txvUserNameLayoutParamsExpanded.addRule(END_OF, imvUserPic.getId());
+                txvUserNameLayoutParamsExpanded.setMarginStart(mCommonMargin);
+                txvUserNameLayoutParamsExpanded.topMargin = 0;
+            }
+            txvUserName.setLayoutParams(txvUserNameLayoutParamsExpanded);
+        }
+    }
+
+    private void expandViewInLandscape() {
+
+        scrollViewLayoutParamsCollapsed = (LayoutParams) scrollView.getLayoutParams();
+        txvUserTitleLayoutParamsCollapsed = (LayoutParams) txvUserTitle.getLayoutParams();
+
+        if (scrollViewLayoutParamsExpanded == null) {
+            scrollViewLayoutParamsExpanded = new LayoutParams(scrollView.getLayoutParams());
+            scrollViewLayoutParamsExpanded.removeRule(BELOW);
+            scrollViewLayoutParamsExpanded.addRule(END_OF, imvUserPic.getId());
+        }
+
+        if (txvUserTitleLayoutParamsExpanded == null) {
+            txvUserTitleLayoutParamsExpanded = new LayoutParams(txvUserTitle.getLayoutParams());
+            txvUserTitleLayoutParamsExpanded.removeRule(END_OF);
+            txvUserTitleLayoutParamsExpanded.addRule(BELOW, imvUserPic.getId());
+            txvUserTitleLayoutParamsExpanded.addRule(ALIGN_PARENT_START);
+            txvUserTitleLayoutParamsExpanded.addRule(START_OF, scrollView.getId());
+            txvUserTitleLayoutParamsExpanded.setMarginStart(mCommonMargin);
+        }
+
+        if (txvUserNameLayoutParamsExpandedLandscape == null) {
+            txvUserNameLayoutParamsExpandedLandscape = new LayoutParams(txvUserName.getLayoutParams());
+            txvUserNameLayoutParamsExpandedLandscape.removeRule(END_OF);
+            txvUserNameLayoutParamsExpandedLandscape.addRule(BELOW, txvUserTitle.getId());
+            txvUserNameLayoutParamsExpandedLandscape.addRule(ALIGN_PARENT_START);
+            txvUserNameLayoutParamsExpandedLandscape.addRule(START_OF, scrollView.getId());
+            txvUserNameLayoutParamsExpandedLandscape.topMargin = 0;
+            txvUserNameLayoutParamsExpandedLandscape.setMarginStart(mCommonMargin);
+        }
+
+        scrollView.setLayoutParams(scrollViewLayoutParamsExpanded);
+        txvUserTitle.setLayoutParams(txvUserTitleLayoutParamsExpanded);
+        txvUserName.setLayoutParams(txvUserNameLayoutParamsExpandedLandscape);
+    }
+
+    private void collapseView() {
+
+        mThisMarginParams = (MarginLayoutParams) getLayoutParams();
+        mThisMarginParams.setMargins(
+                mCommonMargin,
+                getResources().getDimensionPixelSize(R.dimen.dimen_4dp),
+                mCommonMargin,
+                getResources().getDimensionPixelSize(R.dimen.dimen_4dp)
+        );
+        mThisMarginParams.height = RecyclerView.LayoutParams.WRAP_CONTENT;
+
+        imvUserPic.getLayoutParams().height = mUserPicSizeCollapsed;
+        imvUserPic.getLayoutParams().width = mUserPicSizeCollapsed;
+        imvUserPic.setPadding(0, 0, 0, 0);
+        imvUserPic.setImageDrawable(mUserPicFrameCollapsed);
+
+        if (txvUserNameLayoutParamsCollapsed != null) {
+            txvUserName.setLayoutParams(txvUserNameLayoutParamsCollapsed);
+        }
+
+        if (mIsLandscape) {
+            collapseViewInLandscape();
+        }
+
+        setDetailsVisibility(View.GONE);
+    }
+
+    private void collapseViewInLandscape() {
+
+        if (scrollViewLayoutParamsCollapsed != null) {
+            scrollView.setLayoutParams(scrollViewLayoutParamsCollapsed);
+        }
+
+        if (txvUserTitleLayoutParamsCollapsed != null) {
+            txvUserTitle.setLayoutParams(txvUserTitleLayoutParamsCollapsed);
+        }
+
+    }
+
+    private void setDetailsVisibility(int visibility) {
+
+        imvClose.setVisibility(visibility);
+        scrollView.setVisibility(visibility);
+//        txvLogin.setVisibility(visibility);
+//        txvLoginLabel.setVisibility(visibility);
+//        txvEmail.setVisibility(visibility);
+//        txvEmailLabel.setVisibility(visibility);
+//        txvPhone.setVisibility(visibility);
+//        txvPhoneLabel.setVisibility(visibility);
+//        txvCell.setVisibility(visibility);
+//        txvCellLabel.setVisibility(visibility);
+//        txvDob.setVisibility(visibility);
+//        txvDobLabel.setVisibility(visibility);
+//        txvRegistered.setVisibility(visibility);
+//        txvRegisteredLabel.setVisibility(visibility);
+//        txvLocation.setVisibility(visibility);
+//        txvLocationLabel.setVisibility(visibility);
+
+    }
+
+    @Override
+    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+        imvUserPic.setBackground(new BitmapDrawable(bitmap));
+    }
+
+    @Override
+    public void onBitmapFailed(Drawable errorDrawable) {
+        imvUserPic.setBackground(errorDrawable);
+    }
+
+    @Override
+    public void onPrepareLoad(Drawable placeHolderDrawable) {
+        imvUserPic.setBackground(placeHolderDrawable);
     }
 
     public void setTitle(CharSequence title) {
@@ -174,159 +348,6 @@ public class UserListItemView extends RelativeLayout implements Target {
 
     public void setLocation(CharSequence location) {
         txvLocation.setText(location);
-    }
-
-    @Override
-    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        imvUserPic.setBackground(new BitmapDrawable(bitmap));
-    }
-
-    @Override
-    public void onBitmapFailed(Drawable errorDrawable) {
-        imvUserPic.setBackground(errorDrawable);
-    }
-
-    @Override
-    public void onPrepareLoad(Drawable placeHolderDrawable) {
-        imvUserPic.setBackground(placeHolderDrawable);
-    }
-
-    public boolean isExpanded() {
-        return mIsExpanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        mIsExpanded = expanded;
-        if (mIsExpanded) {
-            expandView();
-        } else {
-            collapseView();
-        }
-    }
-
-    private void expandView() {
-
-        mThisMarginParams = (MarginLayoutParams) getLayoutParams();
-        mThisMarginParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        mThisMarginParams.setMargins(mCommonMargin, mCommonMargin, mCommonMargin, mCommonMargin);
-
-        imvUserPic.getLayoutParams().height = getResources().getDimensionPixelSize(R.dimen.userpic_size_expanded);
-        imvUserPic.getLayoutParams().width = getResources().getDimensionPixelSize(R.dimen.userpic_size_expanded);
-        imvUserPic.setImageDrawable(null);
-
-        collapsedTxvUserNameLayoutParams = (LayoutParams) txvUserName.getLayoutParams();
-
-        LayoutParams txvUserNameLayoutParams = new LayoutParams(txvUserName.getLayoutParams());
-        txvUserNameLayoutParams.addRule(BELOW, txvUserTitle.getId());
-        txvUserNameLayoutParams.addRule(END_OF, imvUserPic.getId());
-        txvUserNameLayoutParams.setMarginStart(mCommonMargin);
-        txvUserNameLayoutParams.topMargin = 0;
-        txvUserName.setLayoutParams(txvUserNameLayoutParams);
-
-        setDetailsVisibility(View.VISIBLE);
-
-        if (isLandscape) {
-            expandViewInLandscape();
-        }
-    }
-
-    private void expandViewInLandscape() {
-
-        collapsedScrollViewLayoutParams = (LayoutParams) scrollView.getLayoutParams();
-        collapsedTxvUserTitleLayoutParams = (LayoutParams) txvUserTitle.getLayoutParams();
-        collapsedImvCloseLayoutParams = (LayoutParams) imvClose.getLayoutParams();
-
-        LayoutParams scrollViewLayoutParams = new LayoutParams(scrollView.getLayoutParams());
-        LayoutParams txvUserTitleLayoutParams = new LayoutParams(txvUserTitle.getLayoutParams());
-        LayoutParams txvUserNameLayoutParams = new LayoutParams(txvUserName.getLayoutParams());
-        LayoutParams imvCloseLayoutParams = new LayoutParams(imvClose.getLayoutParams());
-
-        scrollViewLayoutParams.removeRule(BELOW);
-        scrollViewLayoutParams.addRule(END_OF, imvUserPic.getId());
-
-        txvUserTitleLayoutParams.removeRule(END_OF);
-        txvUserTitleLayoutParams.addRule(BELOW, imvUserPic.getId());
-        txvUserTitleLayoutParams.addRule(ALIGN_PARENT_START);
-        txvUserTitleLayoutParams.addRule(START_OF, scrollView.getId());
-        txvUserTitleLayoutParams.setMarginStart(mCommonMargin);
-
-        txvUserNameLayoutParams.removeRule(END_OF);
-        txvUserNameLayoutParams.addRule(BELOW, txvUserTitle.getId());
-        txvUserNameLayoutParams.addRule(ALIGN_PARENT_START);
-        txvUserNameLayoutParams.addRule(START_OF, scrollView.getId());
-        txvUserNameLayoutParams.topMargin = 0;
-        txvUserNameLayoutParams.setMarginStart(mCommonMargin);
-
-        imvCloseLayoutParams.removeRule(ALIGN_PARENT_END);
-        imvCloseLayoutParams.addRule(ALIGN_PARENT_START);
-        imvClose.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_grey_24dp));
-
-        scrollView.setLayoutParams(scrollViewLayoutParams);
-        txvUserTitle.setLayoutParams(txvUserTitleLayoutParams);
-        txvUserName.setLayoutParams(txvUserNameLayoutParams);
-        imvClose.setLayoutParams(imvCloseLayoutParams);
-    }
-
-    private void collapseView() {
-
-        mThisMarginParams = (MarginLayoutParams) getLayoutParams();
-        mThisMarginParams.setMargins(
-                mCommonMargin,
-                getResources().getDimensionPixelSize(R.dimen.dimen_4dp),
-                mCommonMargin,
-                getResources().getDimensionPixelSize(R.dimen.dimen_4dp)
-        );
-        mThisMarginParams.height = RecyclerView.LayoutParams.WRAP_CONTENT;
-
-        imvUserPic.getLayoutParams().height = getResources().getDimensionPixelSize(R.dimen.userpic_size_collapsed);
-        imvUserPic.getLayoutParams().width = getResources().getDimensionPixelSize(R.dimen.userpic_size_collapsed);
-        imvUserPic.setImageDrawable(getResources().getDrawable(R.drawable.round_frame));
-
-        if (collapsedTxvUserNameLayoutParams != null) {
-            txvUserName.setLayoutParams(collapsedTxvUserNameLayoutParams);
-        }
-
-        setDetailsVisibility(View.GONE);
-
-        if (isLandscape) {
-            collapseViewInLandscape();
-        }
-    }
-
-    private void collapseViewInLandscape() {
-
-        if (collapsedScrollViewLayoutParams != null) {
-            scrollView.setLayoutParams(collapsedScrollViewLayoutParams);
-        }
-
-        if (collapsedTxvUserTitleLayoutParams != null) {
-            txvUserTitle.setLayoutParams(collapsedTxvUserTitleLayoutParams);
-        }
-
-        if (collapsedImvCloseLayoutParams != null) {
-            imvClose.setLayoutParams(collapsedImvCloseLayoutParams);
-        }
-    }
-
-    private void setDetailsVisibility(int visibility) {
-
-        imvClose.setVisibility(visibility);
-        scrollView.setVisibility(visibility);
-//        txvLogin.setVisibility(visibility);
-//        txvLoginLabel.setVisibility(visibility);
-//        txvEmail.setVisibility(visibility);
-//        txvEmailLabel.setVisibility(visibility);
-//        txvPhone.setVisibility(visibility);
-//        txvPhoneLabel.setVisibility(visibility);
-//        txvCell.setVisibility(visibility);
-//        txvCellLabel.setVisibility(visibility);
-//        txvDob.setVisibility(visibility);
-//        txvDobLabel.setVisibility(visibility);
-//        txvRegistered.setVisibility(visibility);
-//        txvRegisteredLabel.setVisibility(visibility);
-//        txvLocation.setVisibility(visibility);
-//        txvLocationLabel.setVisibility(visibility);
-
     }
 
 }

@@ -7,6 +7,18 @@ public class UserLocation {
     private String state;
     private String postcode;
 
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getStreet() {
         return street;
     }

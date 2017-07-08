@@ -8,6 +8,7 @@
     <dimen name="text_padding_horizontal">16dp</dimen>
     <dimen name="text_padding_horizontal_negative">-16dp</dimen>
 
+    <dimen name="dimen_minus_1dp">-1dp</dimen>
     <dimen name="dimen_2dp">2dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
 

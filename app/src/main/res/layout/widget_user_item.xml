@@ -9,7 +9,7 @@
         android:layout_height="128dp"
         android:layout_margin="8dp"
         android:src="@drawable/round_frame"
-        android:background="@color/app_material_grey_900"
+        android:background="@drawable/ic_userpic_mock_24dp"
         />
 
     <TextView
