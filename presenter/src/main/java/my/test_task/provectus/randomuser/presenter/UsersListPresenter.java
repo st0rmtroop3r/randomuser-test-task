@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import io.reactivex.Scheduler;
+import io.reactivex.disposables.Disposable;
 import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.model.rest.RandomuserApi;
 import my.test_task.provectus.randomuser.model.utils.UserFirstNameComparator;
@@ -26,6 +27,7 @@ public class UsersListPresenter {
     private static final String TAG = UsersListPresenter.class.getSimpleName() + ": ";
 
     private UsersListView mView;
+    private Disposable randomuserApiDisposable;
     private final Collection<RandomUser> mRandomUsers = new TreeSet<>(new UserFirstNameComparator());
     private final Scheduler mMainScheduler;
     private final Scheduler mIoScheduler;
@@ -60,7 +62,7 @@ public class UsersListPresenter {
     }
 
     private void requestRandomUsers() {
-        restApi.getRandomUsers(20)
+        randomuserApiDisposable = restApi.getRandomUsers(20)
                 .subscribeOn(mIoScheduler)
                 .flatMapIterable(response -> response.getRandomUsers())
                 .filter(user -> user != null)
@@ -73,9 +75,13 @@ public class UsersListPresenter {
     }
 
     private void onUsersLoaded(List<RandomUser> users) {
+        if (randomuserApiDisposable != null) {
+            randomuserApiDisposable.dispose();
+        }
 
         mRandomUsers.addAll(users);
 
+        if (mView == null) return;
         mView.setRandomUsers(mRandomUsers);
     }
 
@@ -88,6 +94,9 @@ public class UsersListPresenter {
 
     public void detach() {
         mView = null;
+        if (randomuserApiDisposable != null) {
+            randomuserApiDisposable.dispose();
+        }
     }
 
     private void fetchUser(RandomUser user) {
