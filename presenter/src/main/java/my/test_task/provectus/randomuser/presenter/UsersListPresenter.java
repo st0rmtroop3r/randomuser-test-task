@@ -31,7 +31,7 @@ public class UsersListPresenter {
     private final Collection<RandomUser> mRandomUsers = new TreeSet<>(new UserFirstNameComparator());
     private final Scheduler mMainScheduler;
     private final Scheduler mIoScheduler;
-    private final DateFormat dateFormatJson = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+    private final DateFormat dateFormatJson = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final DateFormat dateFormatDob = new SimpleDateFormat("yyyy MMM dd");
     private final DateFormat dateFormatRegistration = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
 

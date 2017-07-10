@@ -141,7 +141,7 @@ public class UserListItemView extends RelativeLayout implements Target {
         }
 
         setExpanded(false);
-        setBackground(getResources().getDrawable(R.drawable.rounded_corners_solid));
+        setBackground(getResources().getDrawable(R.drawable.rounded_corners_solid_white));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             StateListAnimator animator = AnimatorInflater
@@ -189,6 +189,7 @@ public class UserListItemView extends RelativeLayout implements Target {
                 txvUserNameLayoutParamsExpanded = new LayoutParams(txvUserName.getLayoutParams());
                 txvUserNameLayoutParamsExpanded.addRule(BELOW, txvUserTitle.getId());
                 txvUserNameLayoutParamsExpanded.addRule(END_OF, imvUserPic.getId());
+                txvUserNameLayoutParamsExpanded.addRule(START_OF, imvClose.getId());
                 txvUserNameLayoutParamsExpanded.setMarginStart(mCommonMargin);
                 txvUserNameLayoutParamsExpanded.topMargin = 0;
             }
