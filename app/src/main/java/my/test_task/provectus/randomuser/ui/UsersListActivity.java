@@ -3,7 +3,6 @@ package my.test_task.provectus.randomuser.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import java.util.Collection;
 
@@ -17,20 +16,28 @@ import my.test_task.provectus.randomuser.model.entities.RandomUser;
 import my.test_task.provectus.randomuser.presenter.UsersListPresenter;
 import my.test_task.provectus.randomuser.ui.listener.OnUserItemClickListener;
 import my.test_task.provectus.randomuser.ui.utils.CustomLayoutManager;
+import my.test_task.provectus.randomuser.ui.view.UserListItemView;
 import my.test_task.provectus.randomuser.view.UsersListView;
 
+/** View implementation of {@link UsersListView} */
 public class UsersListActivity extends BaseActivity implements UsersListView {
 
     private static final String TAG = UsersListActivity.class.getSimpleName();
 
+    /** RecyclerView for UserListItemView */
     @BindView(R.id.rcv_users_list)
     RecyclerView rcvUsersList;
 
+    /** Presenter */
     @Inject
     UsersListPresenter presenter;
 
+    /** {@link UserListItemView} adapter for {@link RecyclerView}*/
     private UsersListRecyclerAdapter adapter;
+
+    /** {@link UserListItemView} OnClickListener*/
     private OnUserItemClickListener userItemClickListener;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,8 +70,7 @@ public class UsersListActivity extends BaseActivity implements UsersListView {
 
     @Override
     public void setRandomUsers(Collection<RandomUser> randomUsers) {
-//        Log.i(TAG, "randomUsers = " + randomUsers);
-        Log.i(TAG, "randomUsers size " + randomUsers.size());
+//        Log.i(TAG, "randomUsers size " + randomUsers.size());
         for (RandomUser user : randomUsers) {
             adapter.addUser(user);
         }
