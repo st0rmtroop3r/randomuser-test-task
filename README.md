@@ -24,6 +24,18 @@ Android application based on MVP pattern
 * XML animation - elevation and ripples
 * Fade and ChangeBounds transitions for user details appearance/disappearance animation
 
+### Demo
+<dl>
+  <dt>User details:</dt>
+  <dd><img src="https://github.com/st0rmtroop3r/randomuser-test-task/blob/master/blob/details.gif")</dd>
+
+  <dt>In Landscape mode</dt>
+  <dd><img src="https://github.com/st0rmtroop3r/randomuser-test-task/blob/master/blob/landscape.gif")</dd>
+</dl>
+
+
+
+
 ### TODO
 * Add two panel mode for tablets
 * Add circular reveal animation for user details pane appearance in two panel mode
